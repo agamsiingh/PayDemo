@@ -1,0 +1,19 @@
+# Minimal Supabase CLI config. Run `supabase link --project-ref <ref>` to attach it to your project.
+project_id = "paydemo"
+
+# SilkPay cannot send a Supabase JWT, so the webhook MUST be public.
+# The webhook authenticates the caller by verifying the MD5 "sign" instead.
+[functions.silkpay-webhook]
+verify_jwt = false
+
+# The other functions are called from the browser with the public anon key and do their own
+# input validation. They hold no per-user identity, so JWT verification adds nothing here
+# (and newer "sb_publishable_" keys are not JWTs, which would make verification fail).
+[functions.create-payin]
+verify_jwt = false
+[functions.query-payin]
+verify_jwt = false
+[functions.get-logs]
+verify_jwt = false
+[functions.demo-simulate]
+verify_jwt = false
